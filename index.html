@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text">
+    <button>ai</button>
+
+    <code></code>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+
+<script>
+    var socket = io.connect('http://localhost:3000');
+
+    socket.on('news', function (data) {
+        console.log(data);
+        document.querySelector('code')
+            .innerHTML += '\n' + data.my;
+    });
+
+    document.querySelector('button')
+        .addEventListener('click', () => {
+            const text = document.querySelector('input').value;
+            socket.emit('my other event', { my: text });
+
+        })
+
+</script>
+    
+</body>
+</html>
